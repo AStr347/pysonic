@@ -16,7 +16,7 @@ class Sonic:
         load SharedObject and create sonicStream object
         sampleWidth - width of sample in bytes (16bit = 2, 32bit = 4)
         '''
-        so = cdll.LoadLibrary("libsonic.so")
+        so = cdll.LoadLibrary("libsonic.so", winmode=0)
         self.__so = so
         self.__obj = so.sonicCreateStream(sampleRate, numChannels)
         self.width = sampleWidth
