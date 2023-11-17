@@ -19,15 +19,15 @@ class Sonic:
         '''
         if platform == "linux" or platform == "linux2":
             # linux
-            so = cdll.LoadLibrary("libsonic.so")
+            so = CDLL("libsonic.so")
         elif platform == "darwin":
-            so = cdll.LoadLibrary("libsonic.dylib")
+            so = CDLL("libsonic.dylib")
         elif platform == "win32":
             # Windows
             try:
-                so = cdll.LoadLibrary("libsonic.dll")
+                so = CDLL("libsonic.dll")
             except:
-                so = cdll.LoadLibrary("libsonic.so", winmode=0)
+                so = CDLL("libsonic.so", winmode=0)
 
         self.__so = so
         self.__obj = so.sonicCreateStream(sampleRate, numChannels)
