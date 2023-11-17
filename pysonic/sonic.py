@@ -1,5 +1,6 @@
 from ctypes import *
 from ctypes import cdll, CDLL
+from sys import platform
 
 class Sonic:
     '''
@@ -16,7 +17,18 @@ class Sonic:
         load SharedObject and create sonicStream object
         sampleWidth - width of sample in bytes (16bit = 2, 32bit = 4)
         '''
-        so = cdll.LoadLibrary("libsonic.so")
+        if platform == "linux" or platform == "linux2":
+            # linux
+            so = cdll.LoadLibrary("libsonic.so")
+        elif platform == "darwin":
+            so = cdll.LoadLibrary("libsonic.dylib")
+        elif platform == "win32":
+            # Windows
+            try:
+                so = cdll.LoadLibrary("libsonic.dll")
+            except:
+                so = cdll.LoadLibrary("libsonic.so", winmode=0)
+
         self.__so = so
         self.__obj = so.sonicCreateStream(sampleRate, numChannels)
         self.width = sampleWidth

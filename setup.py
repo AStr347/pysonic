@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='pySonic',
-    version='0.1.0',
+    version='2023.11.17',
     description='Python packege for use libsonic.so',
     url='https://github.com/AStr347/pysonic',
     author='Anton Svistov',
